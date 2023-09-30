@@ -33,7 +33,7 @@ export const UserActions = ({ onLoginSuccess }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7' }}>
-      <h2>Food Radar Login</h2>
+      <h2>Login</h2>
       <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
         <input
           type="email"
