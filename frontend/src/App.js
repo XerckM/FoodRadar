@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { UserActions } from './components/UserActions';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLoginSuccess = () => {
+    setTimeout(() => {
+      setIsLoggedIn(true);
+    }, 2000); // Display the proxy page for 2 seconds
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLoggedIn ? (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7', fontSize: '24px', color: '#007BFF' }}>
+          Welcome to Food Radar!
+        </div>
+      ) : (
+        <UserActions onLoginSuccess={handleLoginSuccess} />
+      )}
     </div>
   );
 }
