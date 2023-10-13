@@ -1,5 +1,10 @@
-import React, { useState } from 'react';
-import { UserActions } from './components/UserActions';
+import React, { useState } from "react";
+import { UserActions } from "./components/UserActions";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Profile } from "./components/Profile";
+import { Home } from "./components/Home";
+import { MainPage } from "./components/MainPage";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,9 +18,15 @@ function App() {
   return (
     <div className="App">
       {isLoggedIn ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7', fontSize: '24px', color: '#007BFF' }}>
-          Welcome to Food Radar!
-        </div>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<UserActions />} />
+            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Router>
       ) : (
         <UserActions onLoginSuccess={handleLoginSuccess} />
       )}
