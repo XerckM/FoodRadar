@@ -14,7 +14,7 @@ RUNNING AND TESTING:
 1. Once that is all done, go back to your backend terminal and type npm run server
 2. Next, go to your frontend terminal and type npm start
 3. If everything goes well then your web browser should open up and you should see a login page
-4. Test the login by typing xmerdeveloper@gmail.com for the username and password1212 for the password
+4. Test the login
 5. You can also test failure if you modify the username or password
 6. I have tested the backend post, get, delete, put calls using Postman and they are working fine
 7. If you want to know how to set that up let me know here so you could check and test it as well.
