@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import spinner from '../images/spinner.gif';
+import { Link } from 'react-router-dom';
 
 export const UserActions = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
@@ -32,7 +33,9 @@ export const UserActions = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7' }}>
+    <div 
+     style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7' }}
+     >
       <h2>Login</h2>
       <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '300px' }}>
         <input
@@ -51,6 +54,12 @@ export const UserActions = ({ onLoginSuccess }) => {
         />
         <button type="submit" style={{ padding: '10px', fontSize: '16px', cursor: 'pointer', backgroundColor: '#007BFF', color: 'white', border: 'none', borderRadius: '5px' }}>Login</button>
       </form>
+      <div>
+    
+       <Link to="/signup" style={{ textDecoration: 'none' }}>
+        <button style={{ padding: '10px', fontSize: '16px', cursor: 'pointer', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '5px', marginTop: '10px' }}>Signup</button>
+      </Link>
+      </div>
       {message && <div style={{ marginTop: '20px', fontSize: '16px', color: message === 'Login Success' ? 'green' : 'red' }}>{message}</div>}
       {isLoading && <img src={spinner} alt="Loading..." style={{ width: '16px', height: '16px', marginLeft: '5px' }} />}
     </div>
