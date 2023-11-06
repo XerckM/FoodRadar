@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserActions } from './components/UserActions';
+import  UserNavbar  from './components/Navbar';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,12 +13,13 @@ function App() {
 
   return (
     <div className="App">
+      {<UserNavbar/>}
       {isLoggedIn ? (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', backgroundColor: '#f7f7f7', fontSize: '24px', color: '#007BFF' }}>
           Welcome to Food Radar!
         </div>
       ) : (
-        <UserActions onLoginSuccess={handleLoginSuccess} />
+        <UserActions onLoginSuccess={handleLoginSuccess} />    
       )}
     </div>
   );
