@@ -1,28 +1,57 @@
-const mongoose = require('mongoose'); // Erase if already required
+const mongoose = require('mongoose');
 
-// Declare the Schema of the Mongo model
-var restaurantSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        unique:true,
-        index:true,
+const restaurantSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true,
     },
     location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        },
+    },
+    pictures: [{
         type: String,
-        unique: true,
-        index: true
-    },
-    hoursopen: {
-        type: TimeRanges,
-    },
-    ratings: {
-        star: Number,
+        required: true,
+    }],
+    reviews: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 5,
+        },
         comment: String,
-        postedby: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
-    },
-}, { timestamps: true }
-);
+    }],
+    menu: [{
+        dishName: String,
+        description: String,
+        price: Number,
+    }],
+    reservations: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        numberOfPeople: Number,
+        date: Date,
+        time: String,
+    }],
+}, {
+    timestamps: true,
+});
 
-//Export the model
+// Indexing the location for geospatial queries
+restaurantSchema.index({ location: '2dsphere' });
+
 module.exports = mongoose.model('Restaurant', restaurantSchema);
