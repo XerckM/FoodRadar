@@ -9,6 +9,7 @@ const dotenv = require('dotenv').config({path: "./vars/.env"});
 
 const PORT = process.env.PORT || 4000;
 const userRouter = require("./routes/userRoutes");
+const restaurantRouter = require("./routes/restaurantRoutes");
 
 dbConnect();
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/api/user", userRouter);
+app.use("/api/restaurant", restaurantRouter);
 
 app.use(notFound);
 app.use(errorHandler);
