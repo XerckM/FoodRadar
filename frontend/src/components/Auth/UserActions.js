@@ -37,24 +37,29 @@ export const UserActions = () => {
 };
 
 const Register = () => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axios.post("http://localhost:8000/api/user/register", {
+        firstname,
+        lastname,
         email,
+        mobile,
         password,
       });
-      alert("registration completed!");
-    } catch (err) {
-      // figure out the correct error messages to look for
-      if (err.response.data.type === "email-already-exists") {
-        alert("ERROR: Email already in use");
-      } else {
-        alert("ERROR: Something went wrong");
-      }
+      navigate("/login");
+    } catch (error) {
+      setMessage("Signup Failed");
+      console.error(error);
     }
   };
 
@@ -62,6 +67,24 @@ const Register = () => {
     <div class="form-container sign-up-container">
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
+        <div className="form">
+          <label htmlFor="firstname">First Name:</label>
+          <input
+            type="text"
+            id="firstname"
+            value={firstname}
+            onChange={(event) => setFirstname(event.target.value)}
+          />
+        </div>
+        <div className="form">
+          <label htmlFor="lastname">Last Name:</label>
+          <input
+            type="text"
+            id="lastname"
+            value={lastname}
+            onChange={(event) => setLastname(event.target.value)}
+          />
+        </div>
         <div className="form">
           <label htmlFor="email">Email:</label>
           <input
@@ -72,7 +95,16 @@ const Register = () => {
           />
         </div>
         <div className="form">
-          <label htmlFor="password">Username:</label>
+          <label htmlFor="mobile">Mobile:</label>
+          <input
+            type="text"
+            id="mobile"
+            value={mobile}
+            onChange={(event) => setMobile(event.target.value)}
+          />
+        </div>
+        <div className="form">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -103,18 +135,6 @@ const Login = () => {
       localStorage.setItem("userID", result.data.userID);
       navigate("/mainpage");
     } catch (err) {
-      // let errorMessage = "";
-      // switch (err.response.data.type) {
-      //   case "no-user-found":
-      //     errorMessage = "User does not exist";
-      //     break;
-      //   case "wrong-credentials":
-      //     errorMessage = "Incorrect email or password";
-      //     break;
-      //   default:
-      //     errorMessage = "Something went wrong";
-      // }
-      // alert("ERROR:" + errorMessage);
       alert("ERROR: Login failed");
     }
   };
