@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { signUpUser } from '../../components/SignUpActions';
 import spinner from '../../images/spinner.gif';
 import './SignUpView.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUpView = () => {
     const [firstname, setFirstname] = useState('');
@@ -31,7 +31,7 @@ export const SignUpView = () => {
             const newUser = await signUpUser(userDetails);
             setUser(newUser); // Set the UserModel instance to state
             setMessage('Signup Success');
-            navigate('/login'); // Navigate to LoginView after successful signup
+            navigate('/login', user); // Navigate to LoginView after successful signup
         } catch (error) {
             setMessage('Email Already Exists!');
             console.error(error);
@@ -88,7 +88,6 @@ export const SignUpView = () => {
             </form>
             {loading && <img src={spinner} alt="Loading..." className="spinner" />}
             {message && <p className="success-message">{message}</p>}
-            <Link to="/">Login</Link>
         </div>
     );
 };

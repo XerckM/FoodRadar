@@ -10,7 +10,7 @@ class UserModel {
         this.isBlocked = isBlocked;
     }
 
-    // Other methods related to user data can be added here
+    // TODO: Other methods related to user data can be added here
 }
 
 export default UserModel;
