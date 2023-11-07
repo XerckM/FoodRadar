@@ -1,0 +1,114 @@
+/* Navbar.css */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.85);
+    transition: top 0.3s;
+    z-index: 1000;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger-button {
+    background: none;
+    border: none;
+    font-size: 32px; /* Adjusted for larger size */
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.nav-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.signup-button, .login-button {
+    border: 1px solid #28a745;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.signup-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.login-button {
+    background-color: #fff;
+    color: #28a745;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    transition: opacity 0.3s;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -20%;
+    width: 20%;
+    height: 100%;
+    background-color: white;
+    transition: left 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 20px;
+    z-index: 1000;
+}
+
+.menu.open {
+    left: 0;
+}
+
+.menu-button {
+    border: 1px solid #000;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 80%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.menu-button.signup {
+    background-color: #000;
+    color: white;
+}
+
+.menu-button.login {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Additional styles to hide the navbar when the menu is open */
+.navbar.hide {
+    top: -100px; /* Adjust as necessary to hide the navbar */
+}
