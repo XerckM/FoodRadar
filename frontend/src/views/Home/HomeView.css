@@ -18,18 +18,3 @@
 .main-content-home {
     margin-top: 80px; /* Adjusted for navbar height */
 }
-
-.search-bar {
-    position: absolute;
-    left: 10%;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-}
-
-.search-bar input {
-    padding: 10px;
-    width: 200px;
-    border-radius: 5px;
-}
