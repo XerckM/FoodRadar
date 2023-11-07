@@ -5,6 +5,13 @@
 * Browsers: last 4 version
 */
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 .full-page {
     width: 100%;
     height: 100vh;
@@ -30,7 +37,14 @@
             align-items: center;
     padding: 10px 20px;  /* Reduced horizontal padding */
     background-color: rgba(255, 255, 255, 0.85);
+    -webkit-transition: top 0.3s;
+    -o-transition: top 0.3s;
+    transition: top 0.3s;
     z-index: 1000;
+}
+
+.navbar.hide {
+    top: -80px; /* Adjust this value based on the height of your navbar to ensure it's completely hidden */
 }
 
 .nav-left {
@@ -42,15 +56,20 @@
             align-items: center;
 }
 
+.nav-left .hamburger-button {
+    font-size: 30px !important;
+}
+
 .hamburger-button {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 30px;
     margin-right: 10px;
     cursor: pointer;
 }
 
 .nav-title {
+    margin-top: 5px;
     font-size: 24px;
     font-weight: bold;
 }
@@ -79,6 +98,71 @@
 
 .signup-button {
     background-color: #28a745;
+    color: white;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999; /* Ensure it's below the menu but above other content */
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -20%;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    -webkit-transition: left 0.3s;
+    -o-transition: left 0.3s;
+    transition: left 0.3s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-top: 20px; /* Added padding to push the buttons to the top area */
+    gap: 20px; /* Increased gap for better spacing */
+    z-index: 1000;
+}
+
+.menu.open {
+    left: 0;
+}
+
+.menu-button {
+    border: 1px solid #000;
+    padding: 12px 24px; /* Adjusted padding for uniform size */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 80%; /* Set a fixed width for uniform size */
+    text-align: center; /* Center the text */
+    margin-top: 10px; /* Added margin for spacing */
+}
+
+.menu-button.login {
+    background-color: #fff;
+    color: #000;
+}
+
+.menu-button.signup {
+    background-color: #000;
     color: white;
 }
 
