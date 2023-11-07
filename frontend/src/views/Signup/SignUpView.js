@@ -1,6 +1,6 @@
 // SignUpView.js
 import React, { useState } from "react";
-import { signUpUser } from '../../controllers/SignUpActions';
+import { signUpUser } from '../../controllers/SignupController';
 import spinner from '../../images/spinner.gif';
 import './SignUpView.css';
 import { useNavigate } from 'react-router-dom';
