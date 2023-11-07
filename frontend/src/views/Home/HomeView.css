@@ -15,58 +15,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.navbar-home {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    padding: 10px 20px;  /* Reduced horizontal padding */
-    background-color: rgba(255, 255, 255, 0.85);
-    z-index: 1000;
-}
-
-.nav-left-home {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-.nav-left-home .hamburger-button {
-    font-size: 30px !important;
-}
-
-.hamburger-button-home {
-    background: none;
-    border: none;
-    font-size: 30px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.nav-title-home {
-    margin-top: 5px;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.nav-buttons-home {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 10px;
-}
-
 .main-content-home {
     margin-top: 80px; /* Adjusted for navbar height */
 }
