@@ -1,6 +1,6 @@
 // LoginView.js
 import React, { useState } from "react";
-import { loginUser } from "../../components/LoginActions";
+import { loginUser } from "../../controllers/LoginActions";
 import spinner from '../../images/spinner.gif';
 import './LoginView.css';
 import { useNavigate } from 'react-router-dom';
