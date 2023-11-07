@@ -5,7 +5,7 @@
 * Browsers: last 4 version
 */
 
-.full-page {
+.full-page-home {
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -15,7 +15,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.navbar {
+.navbar-home {
     position: fixed;
     top: 0;
     width: 100%;
@@ -33,7 +33,7 @@
     z-index: 1000;
 }
 
-.nav-left {
+.nav-left-home {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -42,47 +42,32 @@
             align-items: center;
 }
 
-.hamburger-button {
+.nav-left-home .hamburger-button {
+    font-size: 30px !important;
+}
+
+.hamburger-button-home {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 30px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.nav-title {
+.nav-title-home {
+    margin-top: 5px;
     font-size: 24px;
     font-weight: bold;
 }
 
-.nav-buttons {
+.nav-buttons-home {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     gap: 10px;
 }
 
-.login-button, .signup-button {
-    border: 1px solid #28a745;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.login-button {
-    margin-right: 35px;
-    background-color: #fff;
-    color: #28a745;
-}
-
-.signup-button {
-    background-color: #28a745;
-    color: white;
-}
-
-.main-content {
+.main-content-home {
     margin-top: 80px; /* Adjusted for navbar height */
 }
 
