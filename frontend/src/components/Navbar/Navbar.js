@@ -18,8 +18,10 @@ export const Navbar = ({ showAuthButtons }) => {
             </header>
             {isMenuOpen && <div className="overlay" onClick={() => setIsMenuOpen(false)}></div>}
             <aside className={isMenuOpen ? "menu open" : "menu"}>
-                <a href="/signup" className="menu-button signup">Sign Up</a>
-                <a href="/login" className="menu-button login">Login</a>
+                {showAuthButtons && <div className="sidebar-buttons">
+                    <a href="/signup" className="menu-button signup">Sign Up</a>
+                    <a href="/login" className="menu-button login">Login</a>
+                </div>}
             </aside>
         </>
     );
