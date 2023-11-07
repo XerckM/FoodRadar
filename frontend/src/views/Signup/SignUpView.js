@@ -41,53 +41,55 @@ export const SignUpView = () => {
     };
 
     return (
-        <div className="signup-container">
-            <h2>Signup</h2>
-            <form onSubmit={handleSignUp}>
-                <input 
-                type="text"
-                placeholder="First Name"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                style={{ padding: '10px', fontSize: '16px' }}
-                required
-                />
-                <input
-                type="text"
-                placeholder="Last Name"
-                value={lastname}
-                onChange={(e) => setLastname(e.target.value)}
-                style={{ padding: '10px', fontSize: '16px' }}
-                required
-                />
-                <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={{ padding: '10px', fontSize: '16px' }}
-                required
-                />
-                <input
-                type="text"
-                placeholder="Mobile"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                style={{ padding: '10px', fontSize: '16px' }}
-                required
-                />
-                <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{ padding: '10px', fontSize: '16px' }}
-                required
-                />
-                <button type="submit">Signup</button>
-            </form>
-            {loading && <img src={spinner} alt="Loading..." className="spinner" />}
-            {message && <p className="success-message">{message}</p>}
+        <div className="signup-body-container">
+            <div className="signup-container">
+                <h2>Signup</h2>
+                <form onSubmit={handleSignUp}>
+                    <input 
+                    type="text"
+                    placeholder="First Name"
+                    value={firstname}
+                    onChange={(e) => setFirstname(e.target.value)}
+                    style={{ padding: '10px', fontSize: '16px' }}
+                    required
+                    />
+                    <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastname}
+                    onChange={(e) => setLastname(e.target.value)}
+                    style={{ padding: '10px', fontSize: '16px' }}
+                    required
+                    />
+                    <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{ padding: '10px', fontSize: '16px' }}
+                    required
+                    />
+                    <input
+                    type="text"
+                    placeholder="Mobile"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    style={{ padding: '10px', fontSize: '16px' }}
+                    required
+                    />
+                    <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    style={{ padding: '10px', fontSize: '16px' }}
+                    required
+                    />
+                    <button type="submit">Signup</button>
+                </form>
+                {loading && <img src={spinner} alt="Loading..." className="spinner" />}
+                {message && <p className="success-message">{message}</p>}
+            </div>
         </div>
     );
 };
