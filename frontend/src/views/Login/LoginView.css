@@ -1,11 +1,48 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 /* LoginView.css */
+.login-body-container {
+    margin: 0;
+    padding: 0;
+    height: 100vh;  /* Ensure body takes full viewport height */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;  /* Use flexbox to center .login-container */
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;  /* Center vertically */
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;  /* Center horizontally */
+    background-image: url('../../images/login_background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .login-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f7f7f7;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 20vw;
+    height: 30vh;
+    padding-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
 }
 
 .login-container h2 {
@@ -14,8 +51,13 @@
 }
 
 .login-container form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     gap: 10px;
     max-width: 300px;
 }
@@ -39,7 +81,6 @@
     background-color: #0056b3;
 }
 
-/* Additional styles in LoginView.css */
 .spinner {
     display: block;
     margin: 20px auto;

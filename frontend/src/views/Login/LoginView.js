@@ -21,7 +21,7 @@ export const LoginView = () => {
             const loggedInUser = await loginUser(email, password);
             setUser(loggedInUser);
             setMessage('Login Successful');
-            navigate('/home'); // Navigate to HomeView after successful login
+            navigate('/home', user); // Navigate to HomeView after successful login
         } catch (error) {
             setMessage('Login Failed!');
             console.error(error);
@@ -31,15 +31,17 @@ export const LoginView = () => {
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <button type="submit">Login</button>
-            </form>
-            {loading && <img src={spinner} alt="Loading..." className="spinner" />}
-            {message && <p className="success-message">Login Successful</p>}
+        <div className="login-body-container">
+            <div className="login-container">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin}>
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <button type="submit">Login</button>
+                </form>
+                {loading && <img src={spinner} alt="Loading..." className="spinner" />}
+                {message && <p className="success-message">Login Successful</p>}
+            </div>
         </div>
     );
 };
