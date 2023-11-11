@@ -56,7 +56,7 @@ const Register = () => {
         mobile,
         password,
       });
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       setMessage("Signup Failed");
       console.error(error);
@@ -114,6 +114,7 @@ const Register = () => {
         </div>
         <button type="submit">Sign Up</button>
       </form>
+      {message}
     </div>
   );
 };
