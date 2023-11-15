@@ -1,16 +1,18 @@
 // LoginView.js
 import React, { useState } from "react";
-import { loginUser } from "../../controllers/UserController";
+import { UserController } from "../../controllers/UserController";
 import spinner from '../../images/spinner.gif';
 import './LoginView.css';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+
 
 export const LoginView = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [user, setUser] = useState(null);
+    const { setToken } = useAuth(); // Use the setToken function from the context
 
     const navigate = useNavigate();
 
@@ -18,10 +20,11 @@ export const LoginView = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const loggedInUser = await loginUser(email, password);
-            setUser(loggedInUser);
+            const response = await UserController.loginUser({ email, password });
+            setToken(response.token)
+            console.log('Login response:', response);
             setMessage('Login Successful');
-            navigate('/home', user); // Navigate to HomeView after successful login
+            navigate('/home');
         } catch (error) {
             setMessage('Login Failed!');
             console.error(error);

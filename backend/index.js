@@ -12,7 +12,14 @@ const userRouter = require("./routes/userRoutes");
 const restaurantRouter = require("./routes/restaurantRoutes");
 
 dbConnect();
-app.use(cors());
+
+const corsOptions = {
+    origin: 'http://localhost:3000', // This should match the domain of your frontend application
+    credentials: true, // This is important to allow sending and receiving cookies
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

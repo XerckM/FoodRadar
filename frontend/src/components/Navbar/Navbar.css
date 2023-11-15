@@ -151,3 +151,32 @@
     background-color: #000;
     color: white;
 }
+
+.logout-button, .menu-button.logout {
+    border: 1px solid #dc3545; /* A red border for the logout button */
+    margin-right: 35px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #dc3545; /* Red background for emphasis on the action */
+    color: white;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.logout-button:hover, .menu-button.logout:hover {
+    background-color: #bd2130; /* Darker shade of red on hover */
+    color: #fff;
+}
+
+.menu-button.logout {
+    background-color: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.menu-button.logout:hover {
+    background-color: #dc3545;
+    color: #fff;
+}

@@ -1,6 +1,7 @@
 // SignUpView.js
+// frontend/src/views/Signup/SignUpView.js
 import React, { useState } from "react";
-import { signUpUser } from '../../controllers/SignupController';
+import { UserController } from '../../controllers/UserController';
 import spinner from '../../images/spinner.gif';
 import './SignUpView.css';
 import { useNavigate } from 'react-router-dom';
@@ -13,9 +14,8 @@ export const SignUpView = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [user, setUser] = useState(null); // Store the UserModel instance
 
-    const navigate = useNavigate(); // Hook to navigate between routes
+    const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -28,12 +28,11 @@ export const SignUpView = () => {
             password
         };
         try {
-            const newUser = await signUpUser(userDetails);
-            setUser(newUser); // Set the UserModel instance to state
-            setMessage('Signup Success');
-            navigate('/login', user); // Navigate to LoginView after successful signup
+            await UserController.registerUser(userDetails);
+            setMessage('Signup Successful');
+            navigate('/login'); // Navigate to LoginView after successful signup
         } catch (error) {
-            setMessage('Email Already Exists!');
+            setMessage('Signup Failed: ' + (error.response?.data?.message || 'An error occurred.'));
             console.error(error);
         } finally {
             setLoading(false);

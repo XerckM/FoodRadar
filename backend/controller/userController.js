@@ -1,9 +1,12 @@
 const User = require("../models/userModel");
+
 const asyncHandler = require("express-async-handler");
 const { generateToken } = require("../config/jwtToken");
 const validateId = require("../utils/validateId");
 const { generateRefreshToken } = require("../config/refreshToken");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+
 
 
 
@@ -14,14 +17,14 @@ const createUser = asyncHandler(async (req, res) => {
     if (!findUser) {
         const newUser = await User.create(req.body);
         res.json(newUser);
+    } else {
+        throw new Error("User Already Exists");
     }
-    else {
-        throw new Error("User Already Exists")
-    }
-});
+  });
 
 // Login A User
 const loginUser = asyncHandler(async (req, res) => {
+    console.log('Login route hit')
     const { email, password } = req.body;
     // check if user exists or not
     const findUser = await User.findOne({ email });
@@ -29,10 +32,10 @@ const loginUser = asyncHandler(async (req, res) => {
         const refreshToken = await generateRefreshToken(findUser?._id);
         const updateuser = await User.findByIdAndUpdate(
             findUser.id,
-            {
-                refreshToken: refreshToken,
-            },
-            { new: true }
+        {
+            refreshToken: refreshToken,
+        },
+        { new: true }
         );
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
@@ -57,12 +60,12 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
     if (!cookie?.refreshToken) throw new Error("No Refresh Token in Cookies");
     const refreshToken = cookie.refreshToken;
     const user = await User.findOne({ refreshToken });
-    if (!user) throw new Error("Refresh token does not match or exist");
-    jwt.verify(refreshToken, process.env.JWT_KEY, (err, decoded) => {
+    if (!user) throw new Error(" No Refresh token present in db or not matched");
+    jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err || user.id !== decoded.id) {
             throw new Error("There is something wrong with refresh token");
         }
-        const accessToken = generateRefreshToken(user?._id);
+        const accessToken = generateToken(user?._id);
         res.json({ accessToken });
     });
 });
@@ -70,18 +73,21 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 // Logout
 
 const logout = asyncHandler(async (req, res) => {
+    console.log('Logout route hit');
     const cookie = req.cookies;
-    if (!cookie?.refreshToken) throw new Error("No refresh token in cookies");
-    const { refreshToken } = cookie.refreshToken;
+    console.log('Cookies:', cookie);
+    if (!cookie?.refreshToken) throw new Error("No Refresh Token in Cookies");
+    const refreshToken = cookie.refreshToken;
     const user = await User.findOne({ refreshToken });
     if (!user) {
         res.clearCookie("refreshToken", {
             httpOnly: true,
             secure: true,
         });
-        return res.sendStatus(204);
-    };
-    await User.findOneAndUpdate(refreshToken, {
+        res.sendStatus(204);
+
+    }
+    await User.findOneAndUpdate({ refreshToken: refreshToken }, {
         refreshToken: "",
     });
     res.clearCookie("refreshToken", {
