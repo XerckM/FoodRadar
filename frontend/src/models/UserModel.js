@@ -1,16 +1,13 @@
 // frontend/src/models/UserModel.js
 class UserModel {
-    constructor(id, firstname, lastname, email, mobile, role, isBlocked) {
-        this.id = id;
+    constructor({ _id, firstname, lastname, email, mobile, token }) {
+        this.id = _id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.mobile = mobile;
-        this.role = role;
-        this.isBlocked = isBlocked;
+        this.token = token;
     }
-
-    // TODO: Other methods related to user data can be added here
 }
 
 export default UserModel;

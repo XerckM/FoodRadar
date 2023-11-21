@@ -1,36 +1,31 @@
-// frontend/src/controllers/UserController.js
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const apiURL = "http://localhost:8000";
 
-export const UserController = {
-  registerUser: async (userData) => {
-    try {
-        const response = await axios.post(`${API_URL}/register`, userData);
-        return response.data;
-      } catch (error) {
-        console.error('Error signing up:', error);
-        throw error;
-      }
-  },
-  loginUser: async ({ email, password }) => {
-    try {
-        const response = await axios.post(`${API_URL}/login`, { email, password });
-        return response.data;
-      } catch (error) {
-        console.error('Error logging in:', error);
-        throw error;
-      }
-  },
-  logoutUser: async () => {
-    try {
-        const response = await axios.get(`${API_URL}/logout`, { withCredentials: true });
-        console.log(response)
+const UserController = {
+    login: async (email, password) => {
+        const response = await axios.post(`${apiURL}/api/user/login`, { email, password }, { withCredentials: true });
+        console.log(response.data);
         return response;
-      } catch (error) {
-        console.error('Error logging out:', error);
-        throw error;
-      }
-  },
-  // Implement other user-related functions like getUserProfile, updateUserProfile
+    },
+    logout: async () => {
+        try {
+            await axios.get(`${apiURL}/api/user/logout`, { withCredentials: true });
+            console.log('User logged out');
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    },
+    signup: async (userData) => {
+        try {
+            const response = await axios.post(`${apiURL}/api/user/register`, userData);
+            return { success: true, data: response.data };
+        } catch (error) {
+            console.error('Signup failed:', error.response.data);
+            return { success: false, message: error.response.data };
+        }
+    }
+    // add more methods here if needed
 };
+
+export default UserController;

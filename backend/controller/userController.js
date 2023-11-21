@@ -5,9 +5,6 @@ const { generateToken } = require("../config/jwtToken");
 const validateId = require("../utils/validateId");
 const { generateRefreshToken } = require("../config/refreshToken");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-
-
 
 
 // Register A User
@@ -39,6 +36,8 @@ const loginUser = asyncHandler(async (req, res) => {
         );
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
+            sameSite: 'none',
+            secure: true,
             maxAge: 72 * 60 * 60 * 1000,
         });
         res.json({
@@ -75,7 +74,6 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
 const logout = asyncHandler(async (req, res) => {
     console.log('Logout route hit');
     const cookie = req.cookies;
-    console.log('Cookies:', cookie);
     if (!cookie?.refreshToken) throw new Error("No Refresh Token in Cookies");
     const refreshToken = cookie.refreshToken;
     const user = await User.findOne({ refreshToken });

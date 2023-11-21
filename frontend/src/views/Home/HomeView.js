@@ -1,15 +1,23 @@
-import React from "react";
-import "./HomeView.css";
-import { Navbar } from "../../components/Navbar/Navbar";
-import { Search } from "../../components/Search/Search";
+// frontend/src/views/home/homeView.js
+
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../../components/buttons/logout/logoutButton';
+import { AuthContext } from '../../components/context/authContext';
 
 export const HomeView = () => {
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    };
+
     return (
-        <div className="full-page-home">
-            <Navbar showAuthButtons={false}/>
-            <div className="main-content-home">
-                <Search />
-            </div>
+        <div>
+            <h1>Home Page</h1>
+            <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
         </div>
     );
 };

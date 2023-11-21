@@ -1,94 +1,84 @@
-// SignUpView.js
-// frontend/src/views/Signup/SignUpView.js
-import React, { useState } from "react";
-import { UserController } from '../../controllers/UserController';
-import spinner from '../../images/spinner.gif';
-import './SignUpView.css';
+// frontend/src/views/signup/signupView.js
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import userController from '../../controllers/userController';
+import './signupView.css';
 
-export const SignUpView = () => {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState('');
-
+export const SignupView = () => {
+    const [userData, setUserData] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        mobile: '',
+        password: ''
+    });
     const navigate = useNavigate();
 
-    const handleSignUp = async (e) => {
+    const handleInputChange = (e) => {
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        const userDetails = {
-            firstname,
-            lastname,
-            email,
-            mobile,
-            password
-        };
-        try {
-            await UserController.registerUser(userDetails);
-            setMessage('Signup Successful');
-            navigate('/login'); // Navigate to LoginView after successful signup
-        } catch (error) {
-            setMessage('Signup Failed: ' + (error.response?.data?.message || 'An error occurred.'));
-            console.error(error);
-        } finally {
-            setLoading(false);
+        const response = await userController.signup(userData);
+        if (response.success) {
+            navigate('/login');
+        } else {
+            // Handle error, show message to user
+            console.error(response.message);
         }
     };
 
     return (
-        <div className="signup-body-container">
-            <div className="signup-container">
-                <h2>Signup</h2>
-                <form onSubmit={handleSignUp}>
-                    <input 
+        <div className="signup-container">
+            <h1>Signup</h1>
+            <form onSubmit={handleSubmit} className="signup-form">
+                <input
                     type="text"
+                    name="firstname"
+                    className="signup-input"
+                    value={userData.firstname}
+                    onChange={handleInputChange}
                     placeholder="First Name"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                    style={{ padding: '10px', fontSize: '16px' }}
                     required
-                    />
-                    <input
+                />
+                <input
                     type="text"
+                    name="lastname"
+                    className="signup-input"
+                    value={userData.lastname}
+                    onChange={handleInputChange}
                     placeholder="Last Name"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                    style={{ padding: '10px', fontSize: '16px' }}
                     required
-                    />
-                    <input
+                />
+                <input
                     type="email"
+                    name="email"
+                    className="signup-input"
+                    value={userData.email}
+                    onChange={handleInputChange}
                     placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    style={{ padding: '10px', fontSize: '16px' }}
                     required
-                    />
-                    <input
+                />
+                <input
                     type="text"
+                    name="mobile"
+                    className="signup-input"
+                    value={userData.mobile}
+                    onChange={handleInputChange}
                     placeholder="Mobile"
-                    value={mobile}
-                    onChange={(e) => setMobile(e.target.value)}
-                    style={{ padding: '10px', fontSize: '16px' }}
-                    required
-                    />
-                    <input
+                />
+                <input
                     type="password"
+                    name="password"
+                    className="signup-input"
+                    value={userData.password}
+                    onChange={handleInputChange}
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    style={{ padding: '10px', fontSize: '16px' }}
                     required
-                    />
-                    <button type="submit">Signup</button>
-                </form>
-                {loading && <img src={spinner} alt="Loading..." className="spinner" />}
-                {message && <p className="success-message">{message}</p>}
-            </div>
+                />
+                <button type="submit" className="signup-button">Signup</button>
+            </form>
         </div>
     );
 };
