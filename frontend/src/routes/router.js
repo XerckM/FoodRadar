@@ -19,7 +19,7 @@ export const AppRoutes = () => {
             <Route path="/home" element={<HomeView />} />
             <Route path="/login" element={<Navigate to="/home" />} />
             <Route path="/signup" element={<Navigate to="/home" />} />
-            {/* add more routes here if needed */}
+            {/* add more routes here if needed here */}
             <Route path="*" element={<Navigate to="/home" />} /> {/* catch all routes that are not defined above */}
           </>
         ) : (
